@@ -1,0 +1,30 @@
+<div>
+    <p style="color:red">
+        <%= msg %>
+    </p>
+    <div> User Login</div>
+    <form action="" enctype="" method="post">
+        <table item-width="100%">
+            <tr>
+                <td>E-mail</td>
+                <td>
+                    <input type="text" name="email" value="<%=data.email%>">
+                    <% if(errors.email) { %> <div><%=errors.email %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="text" name="password" value="">
+                    <% if(errors.password) { %> <div><%=errors.password %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" name="Save" value="Login">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

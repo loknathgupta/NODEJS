@@ -46,6 +46,7 @@ router.all('/add', function(req, res, next){
                 if(err){
                     console.log(err);
                 }else{
+                    req.session.user = userData;
                     res.redirect('/user/');
                     //res.render('user/index', {userList:result});
                 }
@@ -98,6 +99,7 @@ router.all('/edit/(:id)', function(req, res, next){
     
         var errors = req.validationErrors()
         if(!errors){
+
             User.updateUser(req.body, function(err, result){
                 console.log(result);
                 if(err){
@@ -121,5 +123,42 @@ router.all('/edit/(:id)', function(req, res, next){
     }
 });
 /*******************EDIT FUNCTION ENDED  */
+
+/**************LOGIN FUNCTION STARTS HERE ************/
+router.all('/login', function(req, res, next){
+    res.locals.msg = '';
+    res.locals.errors = {} 
+    if(req.method == 'GET'){
+        res.render('user/login', {title: 'User Login', data:{email:'', password:''}})
+    }else{
+        req.assert('email', 'A valid email id is required').isEmail();
+        req.assert('password', 'Passwors is required.').notEmpty();
+        var errors = req.validationErrors();
+        if(errors){
+            errors.forEach(function(error){
+                res.locals.errors[error.param] = error.msg;
+            });
+            res.render('user/login', {data:req.body});
+        }else{            
+            User.getUserForLogin(req.body, function(err, result){
+                if(err){
+                    console.log(err);
+                }else{
+                    if(result.length > 0 && passwordHash.verify(req.body.password, result[0].password)){
+                        req.session.isLoggedIn = true;
+                        console.log(req.session.isLoggedIn);
+                        res.redirect('/user/login')
+                    }else{
+                        res.locals.msg = 'Invalid email id or password has entered.';
+                        res.render('user/login', {data:req.body});
+                    }
+                    
+                }
+            })
+            
+        }
+    }
+})
+/**************LOGIN FUNCTION ENDS HERE ************/
 
 module.exports = router;
