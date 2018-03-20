@@ -50,7 +50,7 @@ router.all('/add', function(req, res, next){
             res.locals.msg = error_msg;   
             console.log(error_msg);         
             //req.flash('error', error_msg)        
-            
+                  
             /**
              * Using req.body.name 
              * because req.param('name') is deprecated
