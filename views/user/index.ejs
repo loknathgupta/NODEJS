@@ -1,0 +1,37 @@
+<% include ../layout/header %>
+
+    <div>Hello!</div>
+    <div>
+        <table width="100%">
+            <tr>
+                <th> Sr. No.</th>
+                <th>User Name</th>
+                <th>E-mail</th>
+                <th>User Level</th>
+                <th>Enable Notifications</th>
+                <th>User Status</th>
+                <th>Action</th>
+            </tr>
+            <% sr=1; userList.forEach(function(user) { %>
+            <tr>
+                <td><%=sr%></td>
+                <td><%=user.first_name+ ' ' + user.last_name%></td>
+                <td><%=user.email%></td>
+                <td><%=user.role%></td>
+                <td><%=(user.enable_notifications=='1'?'Yes':'No')%></td>
+                <td><%=(user.status=='E'?'Enabled':(user.status=='N'?'New':'Disabled'))%></td>
+                <td><a href="/user/edit/<%=user.id%>">Edit</a></td>
+            </tr>
+            <% sr ++; }); %>
+        </table>
+
+        <div><a href="/user/add">Add New User</a></div>
+    </div>
+
+
+
+
+<% include ../layout/footer %>
+<style>
+    th{text-align: left; width:10%;}
+</style>
