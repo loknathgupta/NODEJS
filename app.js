@@ -7,20 +7,22 @@ app.set('view engine', 'ejs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:false}));
 /********************** */
-/**
- * Express Validator Middleware for Form Validation
- */ 
+
+/***************SESSION ************/
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+/***************ENDED HERE SESSION */
+
+/** Express Validator Middleware for Form Validation */ 
 var expressValidator = require('express-validator')
 app.use(expressValidator())
-/************Validation ended here */
+/************Validation ended here *******************/
 
 /*************ROTUNG PART GOES HERE */
 var userRouter = require('./router/userRouter');
 app.use('/user', userRouter);
 /*******ROUTING ENDS HERE */
 
-
 var server = http.createServer(app).listen('7878');
-
 console.log('Server is serted and listening on 7878');
 
