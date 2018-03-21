@@ -17,7 +17,11 @@
                 <td><%=sr%></td>
                 <td><%=user.first_name+ ' ' + user.last_name%></td>
                 <td><%=user.email%></td>
-                <td><%=user.password%></td>
+                <td>
+                    <% if(user.image) {%>
+                    <img src="<%=profilePicLocation+user.image%>" width="40">
+                    <%}%>
+                </td>
                 <td><%=(user.enable_notifications=='1'?'Yes':'No')%></td>
                 <td><%=(user.status=='E'?'Enabled':(user.status=='N'?'New':'Disabled'))%></td>
                 <td><a href="/user/edit/<%=user.id%>">Edit</a></td>

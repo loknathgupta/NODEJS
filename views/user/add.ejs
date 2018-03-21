@@ -2,7 +2,7 @@
     <p style="color:red">
         <%= //msg %>
     </p>
-    <form action="" enctype="" method="post">
+    <form action="" enctype="multipart/form-data" method="post">
         <table item-width="100%">
             <tr>
                 <td>First-Name</td>
@@ -30,6 +30,13 @@
                 <td>
                     <input type="text" name="password" value="">
                     <% if(errors.password) { %> <div><%=errors.password %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Profile-Pic</td>
+                <td>
+                    <input type="file" name="pofile_pic" >
+                    <% if(errors.pofile_pic) { %> <div><%=errors.pofile_pic %></div> <% }%>
                 </td>
             </tr>
             <tr>
